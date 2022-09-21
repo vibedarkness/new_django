@@ -18,6 +18,8 @@ from django.urls import path
 from crispy import views
 
 urlpatterns = [
+    # path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
+    # path('jet/', include('jet.urls', 'jet')),
     path('admin/', admin.site.urls),
     path('', views.index,name='index'),
 ]
