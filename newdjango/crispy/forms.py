@@ -1,3 +1,4 @@
+from tkinter.ttk import Style
 from django import forms
 from django.core.validators import RegexValidator
 from .models import Candidat

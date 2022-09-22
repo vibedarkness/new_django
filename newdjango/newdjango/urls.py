@@ -22,4 +22,6 @@ urlpatterns = [
     # path('jet/', include('jet.urls', 'jet')),
     path('admin/', admin.site.urls),
     path('', views.index,name='index'),
+    # path('video', views.videovibe, name='videovibe'),
+
 ]
