@@ -8,7 +8,7 @@ statuschoice=(
 )
 
 PERSONNALITY=(
-    ('','Choisissez votre personnalité'),
+    # ('','Choisissez votre personnalité'),
     ('Je suis agile','Je suis agile'),
     ('Je suis ambitieux','Je suis ambitieux'),
     ('Je suis sournois','Je suis sournois'),

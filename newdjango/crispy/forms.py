@@ -30,7 +30,7 @@ class CandidatForm(forms.ModelForm):
     email = Lowercase(label='Email', min_length=5, max_length=50, validators=[RegexValidator(
         r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$', message="ceci n'est pas un email valide")], widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     # phone = forms.CharField(label='Telephone' ,min_length=1, max_length=3, validators=[RegexValidator(r'^[0-9]*$', message='ce champ ne dois contenir que des entiers')], widget=forms.TextInput(attrs= {'placeholder':'Telephone'}))
-    message = Lowercase(label='Message', required=True, min_length=10, max_length=1000,
+    message = Lowercase(label='Message', required=False, min_length=10, max_length=1000,
                               widget=forms.Textarea(attrs={'placeholder': 'Messages', 'rows': 4}))
 
     experience=forms.BooleanField(label='Avez vous un experience professionnelle', required=False)
@@ -83,3 +83,27 @@ class CandidatForm(forms.ModelForm):
             'fumeur': forms.RadioSelect(choices=FUMEUR, attrs={'class': 'btn-check'})
 
         }
+
+    #super fonction
+    def __init__(self, *args, **kwargs):
+        super(CandidatForm,self).__init__(*args, **kwargs)
+
+        #control panel
+        #input required
+        self.fields["message"].required=True
+
+        #input desactivé
+        # self.fields["firstname"].disabled=True
+
+        #input readonly
+        # self.fields["email"].widget.attrs.update({'readonly':'readonly'})  
+
+        #readonly for full input(meme chose pour disabled(desactivé))
+
+        readonly=["firstname","lastname","age","email","phone","message"]
+
+        for readvibe in readonly:
+            self.fields[readvibe].widget.attrs['readonly']='true'
+
+        #select option
+        self.fields["personnality"].choices=[('','Choisissez votre personnalité'),] + list(self.fields["personnality"].choices)[1:]
