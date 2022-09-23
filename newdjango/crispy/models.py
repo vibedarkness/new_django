@@ -37,12 +37,12 @@ class Candidat(models.Model):
     genre=models.CharField(max_length=200)
     experience=models.BooleanField(null=True)
     fumeur=models.CharField(max_length=200, default="",choices=FUMEUR)
+    fichier=models.FileField()
 
-
-
-    def clean(self):
-        self.firstname=self.firstname.capitalize()
-        self.lastname=self.lastname.capitalize()
 
     def __str__(self):
         return self.firstname
+
+    # def clean(self):
+    #     self.firstname=self.firstname.capitalize()
+    #     self.lastname=self.lastname.capitalize()

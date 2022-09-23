@@ -22,9 +22,9 @@ class CandidatForm(forms.ModelForm):
 
     # validations
     firstname = forms.CharField(label='Prenom', min_length=3, max_length=50, validators=[RegexValidator(
-        r'^[a-zA-Z0-9]*$', message='ce champ ne dois contenir que des lettres')], widget=forms.TextInput(attrs={'placeholder': 'Prenom'}))
+        r'^[a-zA-Z0-9]*$', message='ce champ ne dois contenir que des lettres')], widget=forms.TextInput(attrs={'placeholder': 'Prenom', 'style': 'font-size:13px; text-transform: capitalize'}))
     lastname = forms.CharField(label='Nom', min_length=2, max_length=50, validators=[RegexValidator(
-        r'^[a-zA-Z0-9]*$', message='ce champ ne dois contenir que des lettres')], widget=forms.TextInput(attrs={'placeholder': 'Nom'}))
+        r'^[a-zA-Z0-9]*$', message='ce champ ne dois contenir que des lettres')], widget=forms.TextInput(attrs={'placeholder': 'Nom', 'style': 'font-size:13px; text-transform: capitalize'}))
     age = forms.CharField(label='Age', min_length=1, max_length=3, validators=[RegexValidator(
         r'^[0-9]*$', message='ce champ ne dois contenir que des entiers')], widget=forms.TextInput(attrs={'placeholder': 'Age'}))
     email = Lowercase(label='Email', min_length=5, max_length=50, validators=[RegexValidator(
@@ -33,8 +33,8 @@ class CandidatForm(forms.ModelForm):
     message = Lowercase(label='Message', required=False, min_length=10, max_length=1000,
                               widget=forms.Textarea(attrs={'placeholder': 'Messages', 'rows': 4}))
 
-    experience=forms.BooleanField(label='Avez vous un experience professionnelle', required=False)
-
+    experience = forms.BooleanField(
+        label='Avez vous un experience professionnelle', required=False)
 
     job = Uppercase(
         label='Fonction',
@@ -42,6 +42,7 @@ class CandidatForm(forms.ModelForm):
         max_length=5,
         widget=forms.TextInput(attrs={
             'placeholder': 'Ex:FR-22',
+            
         })
 
     )
@@ -67,6 +68,10 @@ class CandidatForm(forms.ModelForm):
 
         )
 
+        labels = {
+            'fumeur': 'Vous fumer?',
+        }
+
         widgets = {
             'phone': forms.TextInput(attrs={
                 'style': 'font-size: 15px',
@@ -84,26 +89,27 @@ class CandidatForm(forms.ModelForm):
 
         }
 
-    #super fonction
+    # super fonction
     def __init__(self, *args, **kwargs):
-        super(CandidatForm,self).__init__(*args, **kwargs)
+        super(CandidatForm, self).__init__(*args, **kwargs)
 
-        #control panel
-        #input required
-        self.fields["message"].required=True
+        # control panel
+        # input required
+        self.fields["message"].required = True
 
-        #input desactivé
+        # input desactivé
         # self.fields["firstname"].disabled=True
 
-        #input readonly
-        # self.fields["email"].widget.attrs.update({'readonly':'readonly'})  
+        # input readonly
+        # self.fields["email"].widget.attrs.update({'readonly':'readonly'})
 
-        #readonly for full input(meme chose pour disabled(desactivé))
+        # readonly for full input(meme chose pour disabled(desactivé))
 
-        readonly=["firstname","lastname","age","email","phone","message"]
+        # readonly=["firstname","lastname","age","email","phone","message"]
 
-        for readvibe in readonly:
-            self.fields[readvibe].widget.attrs['readonly']='true'
+        # for readvibe in readonly:
+        #     self.fields[readvibe].widget.attrs['readonly']='true'
 
-        #select option
-        self.fields["personnality"].choices=[('','Choisissez votre personnalité'),] + list(self.fields["personnality"].choices)[1:]
+        # select option
+        self.fields["personnality"].choices = [
+            ('', 'Choisissez votre personnalité'), ] + list(self.fields["personnality"].choices)[1:]
