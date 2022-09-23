@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from crispy import views
+from newdjango import settings
+
+from django.conf.urls.static import static
 
 urlpatterns = [
     # path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
@@ -24,4 +27,4 @@ urlpatterns = [
     path('', views.index,name='index'),
     # path('video', views.videovibe, name='videovibe'),
 
-]
+] +static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) 

@@ -16,7 +16,7 @@
         </div>
     {% endif %}
 {% endfor %}
-    <form method="post" autocomplete="off" class="card p-2 mt-3" novalidate >
+    <form method="post" enctype="multipart/form-data" autocomplete="off" class="card p-2 mt-3" novalidate >
         {% csrf_token %}
         {% comment %} {{form|crispy}} {% endcomment %}
 
@@ -39,8 +39,9 @@
             <div class="col-2">{{form.fumeur|as_crispy_field}} </div>
         </div>
         {{form.experience|as_crispy_field}}
-        <hr style="border: 1px solid black;"></hr>
+        <hr style="border: 1px solid black; margin-bottom: 5px;"></hr>
         {{form.message|as_crispy_field}}
+        {{form.fichier|as_crispy_field}}
 
     <button type='submit' class='btn btn-primary' >Ajouter</button>
     </form>

@@ -9,8 +9,8 @@ from .models import Candidat
 
 class CandidatAdmin(admin.ModelAdmin):
     list_filter=['status']
-    list_display= ['firstname','lastname','email','job','statusvibe','_','created_at']
-    search_fields=['firstname','lastname','email','job','age','status']
+    list_display= ['firstname','lastname','email','job','fichier','statusvibe','_','created_at']
+    search_fields=['firstname','lastname','email','job','fichier','age','status']
     list_per_page: 10
 
     #fonction de changement d'etat

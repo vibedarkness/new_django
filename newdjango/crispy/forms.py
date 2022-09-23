@@ -26,15 +26,17 @@ class CandidatForm(forms.ModelForm):
     lastname = forms.CharField(label='Nom', min_length=2, max_length=50, validators=[RegexValidator(
         r'^[a-zA-Z0-9]*$', message='ce champ ne dois contenir que des lettres')], widget=forms.TextInput(attrs={'placeholder': 'Nom', 'style': 'font-size:13px; text-transform: capitalize'}))
     age = forms.CharField(label='Age', min_length=1, max_length=3, validators=[RegexValidator(
-        r'^[0-9]*$', message='ce champ ne dois contenir que des entiers')], widget=forms.TextInput(attrs={'placeholder': 'Age'}))
+        r'^[0-9]*$', message='ce champ ne dois contenir que des entiers')], widget=forms.TextInput(attrs={'placeholder': 'Age','style':'font-size:13px'}))
     email = Lowercase(label='Email', min_length=5, max_length=50, validators=[RegexValidator(
-        r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$', message="ceci n'est pas un email valide")], widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+        r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$', message="ceci n'est pas un email valide")], widget=forms.TextInput(attrs={'placeholder': 'Email','style':'font-size:13px'}))
     # phone = forms.CharField(label='Telephone' ,min_length=1, max_length=3, validators=[RegexValidator(r'^[0-9]*$', message='ce champ ne dois contenir que des entiers')], widget=forms.TextInput(attrs= {'placeholder':'Telephone'}))
     message = Lowercase(label='Message', required=False, min_length=10, max_length=1000,
-                              widget=forms.Textarea(attrs={'placeholder': 'Messages', 'rows': 4}))
+                              widget=forms.Textarea(attrs={'placeholder': 'Messages', 'rows': 2}))
+
+    fichier=forms.FileField(label='Entrez votre cv', widget=forms.ClearableFileInput(attrs={'style':'font-size:13px'}))
 
     experience = forms.BooleanField(
-        label='Avez vous un experience professionnelle', required=False)
+        label='Avez vous un experience professionnelle?', required=False)
 
     job = Uppercase(
         label='Fonction',
@@ -42,7 +44,7 @@ class CandidatForm(forms.ModelForm):
         max_length=5,
         widget=forms.TextInput(attrs={
             'placeholder': 'Ex:FR-22',
-            
+
         })
 
     )
@@ -74,7 +76,7 @@ class CandidatForm(forms.ModelForm):
 
         widgets = {
             'phone': forms.TextInput(attrs={
-                'style': 'font-size: 15px',
+                'style': 'font-size: 13px',
                 'placeholder': 'Telephone',
                 'data-mask': '(+000) 00-000-00-00'
             }),
@@ -83,9 +85,11 @@ class CandidatForm(forms.ModelForm):
                 choices=SALAIRE,
                 attrs={
                     'class': 'form-control',
+                    'style':'font-size:13px',
                 }),
             'genre': forms.RadioSelect(choices=GENRE, attrs={'class': 'btn-check'}),
-            'fumeur': forms.RadioSelect(choices=FUMEUR, attrs={'class': 'btn-check'})
+            'fumeur': forms.RadioSelect(choices=FUMEUR, attrs={'class': 'btn-check'}),
+            'personnality':forms.Select(attrs={'style':'font-size:13px;'})
 
         }
 
